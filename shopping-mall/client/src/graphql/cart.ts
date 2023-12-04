@@ -4,13 +4,7 @@ import { Product } from './products'
 export type CartType = {
   id: string
   amount: number
-  // product: Product
-
-  imageUrl: string
-  price: number
-  title: string
-  // description: string
-  // createdAt: string
+  product: Product
 }
 
 export const GET_CART = gql`

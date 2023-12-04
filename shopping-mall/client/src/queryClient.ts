@@ -25,7 +25,7 @@ export const getClient = (() => {
   };
 })();
 
-const BASE_URL = "/"; // https://fakestoreapi.com
+const BASE_URL = "http://localhost:8000/graphql"; // https://fakestoreapi.com
 
 export const restFetcher = async ({
   method,

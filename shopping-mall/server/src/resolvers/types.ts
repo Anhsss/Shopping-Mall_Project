@@ -4,17 +4,17 @@ export type Resolver = {
       parent: any,
       args: { [key: string]: any },
       context: {
-/*         db: {
+        db: {
           cart: Cart;
           products: Products;
-        }; */
+        };
       },
       info: any
-    ) => any
+    ) => any;
   };
 };
 
-/* export type Product = {
+export type Product = {
   id: string;
   imageUrl: string;
   price: number;
@@ -29,4 +29,4 @@ export type CartItem = {
   id: string;
   amount: number;
 };
-export type Cart = CartItem[]; */
+export type Cart = CartItem[];
