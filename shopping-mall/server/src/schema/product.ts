@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express'
 
 const productSchema = gql`
   type Product {
@@ -11,9 +11,21 @@ const productSchema = gql`
   }
 
   extend type Query {
-    products: [Product!]  
+    products(cursor: ID, showDeleted: Boolean): [Product!]
     product(id: ID!): Product!
   }
-`;
 
-export default productSchema;
+  extend type Mutation {
+    addProduct(imageUrl: String!, price: Int!, title: String!, description: String!): Product!
+    updateProduct(
+      id: ID!
+      imageUrl: String
+      price: Int
+      title: String
+      description: String
+    ): Product!
+    deleteProduct(id: ID!): ID!
+  }
+`
+
+export default productSchema
