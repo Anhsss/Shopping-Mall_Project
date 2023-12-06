@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 
-const ModalPortal = ({ children }: { children: ReactNode }) => {
+const ModalPortal = ({ children }: { children: ReactNode }) => {     // { children: ReactChild }
   return createPortal(children, document.getElementById('modal')!);
 };
 

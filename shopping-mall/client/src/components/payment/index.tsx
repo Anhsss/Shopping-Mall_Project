@@ -5,7 +5,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil'
 import { EXECUTE_PAY } from '../../graphql/payment'
 import { graphqlFetcher } from '../../queryClient'
 import { checkedCartState } from '../../recoils/cart'
-import WillPay from '../willPay'      // 수정
+import WillPay from '../willPay'     
 import PaymentModal from './modal'
 
 type PaymentInfos = string[]
