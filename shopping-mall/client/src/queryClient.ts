@@ -29,11 +29,11 @@ export const graphqlFetcher = <T>(query: RequestDocument, variables = {}) =>
     "Access-Control-Allow-Origin": BASE_URL,
   });
 
-/* export const graphqlFetcher = (query: RequestDocument, variables = {}) =>
-  request(`${BASE_URL}/graphql`, query, variables, {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': BASE_URL,
-  }) */
+//  export const graphqlFetcher = (query: RequestDocument, variables = {}) =>
+  // request(`${BASE_URL}/graphql`, query, variables, {
+  //   'Content-Type': 'application/json',
+  //   'Access-Control-Allow-Origin': BASE_URL,
+  // })
 
 export const QueryKeys = {
   PRODUCTS: "PRODUCTS",
