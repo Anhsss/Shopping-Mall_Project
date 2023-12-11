@@ -21,16 +21,26 @@ const PAGE_SIZE = 15
 const productResolver: Resolver = {
   Query: {
     products: async (parent, { cursor = '', showDeleted = false }) => {
-      const products = collection(db, 'products')
-      const queryOptions = [orderBy('createdAt', 'desc')]
+      const products = collection(db, 'products');
+      const orderByOptions = [orderBy('createdAt', 'desc')];
+      const whereOptions = [];
+
       if (cursor) {
-        const snapshot = await getDoc(doc(db, 'products', cursor))
-        queryOptions.push(startAfter(snapshot) as any)
-        // queryOptions.push(startAfter(snapshot))
+        const cursorSnapshot = await getDoc(doc(db, 'products', cursor));
+        if (cursorSnapshot.exists()) {
+          const cursorCreatedAt = cursorSnapshot.get('createdAt');
+
+          // @ts-ignore
+          orderByOptions.push(orderBy('createdAt', 'desc'), startAfter(cursorCreatedAt));
+        } else {
+          // cursor에 해당하는 문서가 없는 경우 예외 처리 또는 기본값을 설정합니다.
+          return []
+        }
       }
-      if (!showDeleted) queryOptions.unshift(orderBy('createdAt', 'asc'))
-      // if (!showDeleted) queryOptions.unshift(where('createdAt', '!=', null))
-      const q = query(products, ...queryOptions, limit(PAGE_SIZE))
+      if (!showDeleted) {
+        whereOptions.push(where('createdAt', '!=', null));
+      }
+      const q = query(products, ...orderByOptions, ...whereOptions, limit(PAGE_SIZE));
       const snapshot = await getDocs(q)
       const data: DocumentData[] = []
       snapshot.forEach(doc =>
